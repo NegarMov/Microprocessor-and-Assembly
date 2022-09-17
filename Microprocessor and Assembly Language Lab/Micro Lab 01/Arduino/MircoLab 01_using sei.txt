@@ -1,0 +1,48 @@
+#include<string.h>
+
+void setup() {
+
+  for (int i=0; i<7; i++)
+    pinMode(i, OUTPUT);
+
+  for (int i=19; i<22; i++)
+    pinMode(i, INPUT);
+
+  attachInterrupt(digitalPinToInterrupt(19), firstButton, FALLING);
+  attachInterrupt(digitalPinToInterrupt(20), secondButton, FALLING);
+  attachInterrupt(digitalPinToInterrupt(21), thirdButton, FALLING);
+  
+}
+
+void loop() {
+}
+
+void firstButton() {
+  for (int i=5; i>=0; i--) {
+    digitalWrite(i, HIGH);
+    sei();
+    delay(250);
+    cli();
+  } 
+}
+
+void secondButton() {
+  int count = strlen("Negar");
+  for (int i=0; i<count; i++) {
+    for (int j=0; j<6; j++)
+      digitalWrite(j, LOW);
+    sei();
+    delay(250);
+    cli();
+    for (int j=0; j<6; j++)
+      digitalWrite(j, HIGH);
+    sei();
+    delay(250);
+    cli();
+  }
+}
+
+void thirdButton() {
+  for (int i=0; i<6; i++)
+    digitalWrite(i, LOW);
+}
